@@ -9,6 +9,12 @@ import {
 	Button,
 } from 'react-bootstrap'
 import ResultTable from './ResultTable'
+import styled from 'styled-components'
+import vars from '../styles/vars'
+
+const CardHeader = styled(Card.Header)`
+	background: ${(props) => (props.success ? vars.headerAC : vars.headerDF)};
+`
 
 const TaskCard = (props) => {
 	const { problemId, problemName, result, success } = props
@@ -80,7 +86,7 @@ const TaskCard = (props) => {
 
 	return (
 		<Accordion as={Card} defaultActiveKey='0' className='mb-4'>
-			<Accordion.Toggle as={Card.Header} eventKey='0' success>
+			<Accordion.Toggle as={CardHeader} eventKey='0' success={success}>
 				<h5 className='my-1'>
 					Problem {problemId}: {problemName}
 				</h5>
@@ -88,7 +94,7 @@ const TaskCard = (props) => {
 			<Accordion.Collapse eventKey='0'>
 				<Card.Body as={Row} className='p-5 align-items-center'>
 					<Col className='ml-2 mr-5'>
-						<ResultTable result={result} />
+						<ResultTable result={result} success={success} />
 					</Col>
 					<Col style={{ maxWidth: '290px' }}>
 						<Form.File

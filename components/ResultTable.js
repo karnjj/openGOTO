@@ -5,20 +5,34 @@ import vars from '../styles/vars'
 const StyledTable = styled(Table)`
 	text-align: center;
 `
+const TaskStatus = styled.th`
+	background: ${(props) => {
+		switch (props.success) {
+			case true:
+				return vars.statusAC
+			case false:
+				return vars.statusWA
+			default:
+				return vars.statusDF
+		}
+	}};
+`
 
-const ResultTable = ({ result }) => {
-	const [cases, score] = result
+const ResultTable = ({ result, success }) => {
 	return (
 		<StyledTable size='sm' bordered className='mb-0'>
 			<tbody>
 				<tr>
-					<th rowSpan='2' />
+					<TaskStatus rowSpan='2' success={success} />
 					<th>Result</th>
 					<th>Score</th>
 				</tr>
 				<tr>
-					<td className='py-3'>{cases}</td>
-					<td className='py-3'>{score}</td>
+					{result?.map((res, index) => (
+						<td className='py-3' key={index}>
+							{res}
+						</td>
+					))}
 				</tr>
 			</tbody>
 		</StyledTable>
