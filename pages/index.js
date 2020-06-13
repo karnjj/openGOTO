@@ -24,6 +24,7 @@ const tasks = [
 		success: undefined,
 	},
 ]
+const serverTime = 1500
 
 const Index = () => {
 	return (
@@ -35,7 +36,7 @@ const Index = () => {
 					))}
 				</Col>
 				<Col lg={4}>
-					<TimerCard />
+					<TimerCard currentTime={serverTime} />
 					<AnnounceCard />
 				</Col>
 			</Row>
