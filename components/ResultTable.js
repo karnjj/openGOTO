@@ -7,7 +7,7 @@ const StyledTable = styled(Table)`
 `
 const TaskStatus = styled.th`
 	background: ${(props) => {
-		switch (props.success) {
+		switch (props.accept) {
 			case true:
 				return vars.statusAC
 			case false:
@@ -18,12 +18,12 @@ const TaskStatus = styled.th`
 	}};
 `
 
-const ResultTable = ({ result, success }) => {
+const ResultTable = ({ result, accept }) => {
 	return (
 		<StyledTable size='sm' bordered className='mb-0'>
 			<tbody>
 				<tr>
-					<TaskStatus rowSpan='2' success={success} />
+					<TaskStatus rowSpan='2' accept={accept} />
 					<th>Result</th>
 					<th>Score</th>
 				</tr>

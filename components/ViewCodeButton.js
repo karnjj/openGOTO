@@ -4,12 +4,17 @@ import { Modal, Button } from 'react-bootstrap'
 
 import styled from 'styled-components'
 import prism from 'prismjs'
+import vars from '../styles/vars'
 
 const FontPre = styled.pre`
 	span,
 	code {
 		font-family: 'Fira Code', monospace, 'Courier New', Courier;
 	}
+`
+const StyledButton = styled(Button)`
+	background: ${vars.buttonGray};
+	border-color: ${vars.buttonGray};
 `
 
 const ViewCodeButton = (props) => {
@@ -40,9 +45,13 @@ const ViewCodeButton = (props) => {
 
 	return (
 		<>
-			<Button onClick={handleShow} disabled={!submissionId}>
+			<StyledButton
+				variant='secondary'
+				onClick={handleShow}
+				disabled={!submissionId}
+			>
 				🔎
-			</Button>
+			</StyledButton>
 			<Modal show={show} onHide={handleClose} centered size='lg'>
 				<Modal.Header closeButton>
 					<Modal.Title>Submission : {submissionId}</Modal.Title>

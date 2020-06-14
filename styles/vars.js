@@ -10,4 +10,8 @@ export default {
 
 	headerAC: '#7AD4AD',
 	headerDF: 'rgba(204, 204, 204, 0.5)',
+
+	buttonGray: '#969DB5',
+	buttonGreen: '#7DB4AD',
+	buttonOrange: '#ff851b',
 }

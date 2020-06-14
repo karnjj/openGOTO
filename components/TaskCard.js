@@ -12,13 +12,40 @@ import ResultTable from './ResultTable'
 import styled from 'styled-components'
 import vars from '../styles/vars'
 import ViewCodeButton from './ViewCodeButton'
+import { darken, opacify } from 'polished'
 
 const CardHeader = styled(Card.Header)`
 	background: ${(props) => (props.success ? vars.headerAC : vars.headerDF)};
 `
 
+const ViewPDFButton = styled.a`
+	background: ${vars.buttonGreen};
+	border-color: ${vars.buttonGreen};
+	color: white !important;
+	&:hover,
+	&:focus {
+		background: ${darken(0.2, vars.buttonGreen)}!important;
+		border-color: ${darken(0.2, vars.buttonGreen)}!important;
+	}
+	&:focus,
+	&:active,
+	&:visited {
+		box-shadow: 0 0 0 0.2rem ${opacify(0.5, vars.buttonGreen)}!important;
+	}
+`
+const SubmitButton = styled(Button)`
+	background: ${vars.buttonOrange};
+	border-color: ${vars.buttonOrange};
+	color: white !important;
+	&:hover,
+	&:focus {
+		background: ${darken(0.2, vars.buttonOrange)}!important;
+		border-color: ${darken(0.2, vars.buttonOrange)}!important;
+	}
+`
+
 const TaskCard = (props) => {
-	const { problemId, problemName, result, success, submissionId } = props
+	const { problemId, problemName, result, accept, submissionId } = props
 	// const userData = useAuthContext()
 	// const [selectedFile, setSelectedFile] = useState(undefined)
 	// const [fileName, setFileName] = useState('')
@@ -87,7 +114,7 @@ const TaskCard = (props) => {
 
 	return (
 		<Accordion as={Card} defaultActiveKey='0' className='mb-4'>
-			<Accordion.Toggle as={CardHeader} eventKey='0' success={success}>
+			<Accordion.Toggle as={CardHeader} eventKey='0' accept={accept}>
 				<h5 className='my-1'>
 					Problem {problemId}: {problemName}
 				</h5>
@@ -95,7 +122,7 @@ const TaskCard = (props) => {
 			<Accordion.Collapse eventKey='0'>
 				<Card.Body as={Row} className='p-5 align-items-center'>
 					<Col className='ml-2 mr-5'>
-						<ResultTable result={result} success={success} />
+						<ResultTable result={result} accept={accept} />
 					</Col>
 					<Col style={{ maxWidth: '290px' }}>
 						<Form.File
@@ -108,16 +135,20 @@ const TaskCard = (props) => {
 						/>
 						<div className='d-flex justify-content-between'>
 							<ViewCodeButton submissionId={submissionId} />
-							<a
-								className='btn btn-secondary'
+							<ViewPDFButton
+								className='btn btn-success'
 								target='_blank'
 								// href={`${process.env.API_URL}/api/docs/${sname}`}
 							>
 								View PDF
-							</a>
-							<Button type='submit' onClick={undefined /*uploadFile*/}>
+							</ViewPDFButton>
+							<SubmitButton
+								variant='warning'
+								type='submit'
+								onClick={undefined /*uploadFile*/}
+							>
 								Submit
-							</Button>
+							</SubmitButton>
 						</div>
 					</Col>
 				</Card.Body>
