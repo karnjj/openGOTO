@@ -11,13 +11,14 @@ import {
 import ResultTable from './ResultTable'
 import styled from 'styled-components'
 import vars from '../styles/vars'
+import ViewCodeButton from './ViewCodeButton'
 
 const CardHeader = styled(Card.Header)`
 	background: ${(props) => (props.success ? vars.headerAC : vars.headerDF)};
 `
 
 const TaskCard = (props) => {
-	const { problemId, problemName, result, success } = props
+	const { problemId, problemName, result, success, submissionId } = props
 	// const userData = useAuthContext()
 	// const [selectedFile, setSelectedFile] = useState(undefined)
 	// const [fileName, setFileName] = useState('')
@@ -106,7 +107,7 @@ const TaskCard = (props) => {
 							custom
 						/>
 						<div className='d-flex justify-content-between'>
-							<Button>🔎</Button>
+							<ViewCodeButton submissionId={submissionId} />
 							<a
 								className='btn btn-secondary'
 								target='_blank'

@@ -9,18 +9,21 @@ const tasks = [
 		problemId: 1,
 		problemName: 'Bomb',
 		result: ['PPPPPPPPPP', 100],
+		submissionId: 101,
 		success: true,
 	},
 	{
 		problemId: 2,
 		problemName: 'Sword',
 		result: ['PPPPPPPTTT', 70],
+		submissionId: 202,
 		success: false,
 	},
 	{
 		problemId: 3,
 		problemName: 'Bomb',
 		result: ['-', '-'],
+		submissionId: 303,
 		success: undefined,
 	},
 ]
