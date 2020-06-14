@@ -40,7 +40,9 @@ const ViewCodeButton = (props) => {
 
 	return (
 		<>
-			<Button onClick={handleShow}>🔎</Button>
+			<Button onClick={handleShow} disabled={!submissionId}>
+				🔎
+			</Button>
 			<Modal show={show} onHide={handleClose} centered size='lg'>
 				<Modal.Header closeButton>
 					<Modal.Title>Submission : {submissionId}</Modal.Title>

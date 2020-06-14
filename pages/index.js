@@ -23,8 +23,6 @@ const tasks = [
 		problemId: 3,
 		problemName: 'Bomb',
 		result: ['-', '-'],
-		submissionId: 303,
-		success: undefined,
 	},
 ]
 const serverTime = 1500
