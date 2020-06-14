@@ -15,7 +15,7 @@ import ViewCodeButton from './ViewCodeButton'
 import { darken, opacify } from 'polished'
 
 const CardHeader = styled(Card.Header)`
-	background: ${(props) => (props.success ? vars.headerAC : vars.headerDF)};
+	background: ${(props) => (props.accept ? vars.headerAC : vars.headerDF)};
 `
 
 const ViewPDFButton = styled.a`
