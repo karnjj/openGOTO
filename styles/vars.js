@@ -3,6 +3,8 @@ export default {
 	otog: '#ff851b',
 	lightGray: '#eaeaea',
 	gray: '#808080',
+	black: '#000000',
+	white: '#ffffff',
 
 	statusDF: '#A0A0A0',
 	statusAC: 'rgba(38, 104, 96, 0.7)',

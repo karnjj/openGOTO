@@ -3,7 +3,7 @@ import { Row, Col } from 'react-bootstrap'
 import TaskCard from '../components/TaskCard'
 import TimerCard from '../components/TimerCard'
 import AnnounceCard from '../components/AnnounceCard'
-
+ 
 const tasks = [
 	{
 		problemId: 1,

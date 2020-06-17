@@ -3,11 +3,13 @@ import styled from 'styled-components'
 import vars from '../styles/vars'
 
 const StyledNavbar = styled(Navbar)`
-	background: ${vars.orange};
+	background: ${vars.lightGray};
 	a,
-	h4,
-	button {
-		color: ${vars.lightGray}!important;
+	h4{
+		color: ${vars.black}!important;
+	}
+	button{
+		color: ${vars.white}!important; 
 	}
 `
 const LogoutButton = styled(Button)`
