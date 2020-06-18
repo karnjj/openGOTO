@@ -1,7 +1,7 @@
 import { Navbar, Button } from 'react-bootstrap'
 import styled from 'styled-components'
 import vars from '../styles/vars'
-
+import { darken, opacify } from 'polished'
 const StyledNavbar = styled(Navbar)`
 	background: ${vars.lightGray};
 	a,
@@ -13,8 +13,19 @@ const StyledNavbar = styled(Navbar)`
 	}
 `
 const LogoutButton = styled(Button)`
-	background: ${vars.orange};
-	border: 1px solid ${vars.gray};
+	background: ${vars.otog};
+	border-color: ${vars.otog};
+	color: white !important;
+	&:hover,
+	&:focus {
+		background: ${vars.red}!important;
+		border-color: ${vars.red}!important;
+	}
+	&:focus,
+	&:active,
+	&:visited {
+		box-shadow: 0 0 0 0.2rem ${vars.lightGray}!important;
+	}
 	padding: 6px 24px;
 `
 const logout = () => {
