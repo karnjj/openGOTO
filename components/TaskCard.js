@@ -51,7 +51,7 @@ const TaskCard = (props) => {
 
 	const uploadFile = async (e) => {
 		e.preventDefault()
-		if (!selectedFile) return
+		if (!file) return
 		const url = `${process.env.API_URL}/api/upload`
 		const data = new FormData()
 		data.append('probId', problemId)
@@ -108,7 +108,7 @@ const TaskCard = (props) => {
 						<Form.File
 							as={Col}
 							className='mb-3'
-							label={'Choose file' || file.name}
+							label={file?.name || 'Choose file'}
 							accept='.c,.cpp'
 							onChange={selectFile}
 							custom
