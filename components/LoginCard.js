@@ -1,5 +1,4 @@
 import { useState } from 'react'
-
 import { login } from '../auth'
 import {
 	Row,
@@ -10,8 +9,9 @@ import {
 	Image,
 	Modal,
 	Alert,
+	Container,
 } from 'react-bootstrap'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 const OutlineButton = styled(Button)`
 	color: #ff851b;
@@ -36,6 +36,28 @@ const CustomForm = styled(Form.Control)`
 		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #ff851b;
 	}
 `
+
+const FadeIn = keyframes `
+	0%{
+		opacity: 0;
+	}
+	100%{
+		opacity: 1;
+	}
+`
+const FadeOut = keyframes `
+	0%{
+		opacity: 1;
+	}
+	100%{
+		opacity: 0;
+	}
+`
+const FadeOutCard = styled(Card)`
+	background-color: #f7f7f7;
+	width: 375px;
+	animation: 1.3s ${FadeIn} ease-out;
+` 
 
 const LoginCard = () => {
 	const [username, setUsername] = useState('')
@@ -73,13 +95,13 @@ const LoginCard = () => {
 	}
 
 	return (
-		<Card style={{ backgroundColor: '#f7f7f7', width: '375px' }}>
+		<FadeOutCard>
 			<Image
 				src='otoglogo.png'
 				style={{ width: '70px' }}
 				className='mx-auto mt-4'
 			/>
-			<Card.Body as='Container'>
+			<Card.Body as={Container}>
 				<Modal show={!!error} onHide={closeAlert}>
 					<Modal.Header closeButton>
 						<Modal.Title>Login Failed !</Modal.Title>
@@ -120,7 +142,7 @@ const LoginCard = () => {
 				</Row>
 				<br />
 			</Card.Body>
-		</Card>
+		</FadeOutCard>
 	)
 }
 
