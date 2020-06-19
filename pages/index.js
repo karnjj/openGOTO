@@ -126,7 +126,6 @@ const EndingAnnounce = (props) => {
 }
 
 const Index = (props) => {
-	console.log(props);
 	const { start, end, serverTime } = props
 	const isStarting = serverTime < start
 	const isHolding = start <= serverTime && serverTime < end
