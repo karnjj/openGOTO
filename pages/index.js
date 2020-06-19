@@ -4,29 +4,8 @@ import TaskCard from '../components/TaskCard'
 import TimerCard from '../components/TimerCard'
 import AnnounceCard from '../components/AnnounceCard'
 
-import { withAuthSync, useAuthContext } from '../auth'
+import { withAuthSync } from '../auth'
 
-const tasks = [
-	{
-		problemId: 1,
-		problemName: 'Bomb',
-		result: ['PPPPPPPPPP', 100],
-		submissionId: 101,
-		accept: true,
-	},
-	{
-		problemId: 2,
-		problemName: 'Sword',
-		result: ['PPPPPPPTTT', 70],
-		submissionId: 202,
-		accept: false,
-	},
-	{
-		problemId: 3,
-		problemName: 'Archer',
-		result: ['-', '-'],
-	},
-]
 const Index = ({ tasks, serverTime = 1500 }) => {
 	return (
 		<PageLayout>

@@ -5,6 +5,7 @@ import { Modal, Button } from 'react-bootstrap'
 import styled from 'styled-components'
 import prism from 'prismjs'
 import vars from '../styles/vars'
+import { useAuthContext } from '../auth'
 
 const FontPre = styled.pre`
 	span,
@@ -17,23 +18,19 @@ const StyledButton = styled(Button)`
 	border-color: ${vars.buttonGray};
 `
 
-const ViewCodeButton = (props) => {
-	const { submissionId } = props
-
+const ViewCodeButton = ({ submissionId }) => {
+	const { token } = useAuthContext()
 	const [show, setShow] = useState(false)
 	const [sourceCode, setSourceCode] = useState('')
 
 	const handleClose = () => setShow(false)
 	const handleShow = async () => {
-		// let url = resultId
-		// 	? `${process.env.API_URL}/api/scode?idSubmit=${resultId}`
-		// 	: `${process.env.API_URL}/api/scode?idProb=${probId}`
-		// let headers = { 'Content-Type': 'application/json' }
-		// headers['authorization'] = token ? token : ''
-		// const response = await fetch(url, { headers })
-		// const data = await response.json()
-		// setSourceCode(data.src)
-		setSourceCode('#include <iostream>')
+		let url = `${process.env.API_URL}/api/scode/${submissionId}`
+		let headers = { 'Content-Type': 'application/json' }
+		headers['authorization'] = `Bearer ${token}`
+		const response = await fetch(url, { headers })
+		const json = await response.json()
+		setSourceCode(json.scode)
 		setShow(true)
 	}
 
