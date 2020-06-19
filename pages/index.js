@@ -48,7 +48,7 @@ const TaskCards = ({ start, end, serverTime }) => {
 					))}
 				</Col>
 				<Col lg={4}>
-					<TimerCard currentTime={serverTime} />
+					<TimerCard currentTime={end - serverTime} />
 					<AnnounceCard />
 				</Col>
 			</Row>
@@ -59,7 +59,7 @@ const TaskCards = ({ start, end, serverTime }) => {
 const WaitingAnnounce = ({ start, serverTime }) => {
 	const timeLeft = useRef(serverTime - start)
 	const countDown = () => (timeLeft.current -= 1)
-	const date = new Date(serverTime)
+	const date = new Date(start*1000)
 
 	useEffect(() => {
 		const timer = setInterval(countDown, 1000)
@@ -76,7 +76,7 @@ const WaitingAnnounce = ({ start, serverTime }) => {
 		<PageLayout container={false}>
 			<Announce>
 				<h1>การสอบจะเริ่มตอน</h1>
-				<h2>{`${date.getHours} : ${date.getMinutes}`}</h2>
+				<h2>{` ${date.getHours()} : ${date.getMinutes()}`}</h2>
 			</Announce>
 		</PageLayout>
 	)
@@ -93,6 +93,7 @@ const EndingAnnounce = (props) => {
 }
 
 const Index = (props) => {
+	console.log(props);
 	const { start, end, serverTime } = props
 	const isStarting = serverTime < start
 	const isHolding = start < serverTime && serverTime < end
