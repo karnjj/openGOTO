@@ -20,7 +20,11 @@ function getSubmissionWithId(req,res) {
 		where userId = ? and probId = ? order by submissionId desc limit 1`
 	db.query(sql,[userData.id,probId],(err,result) => {
 		if(err) return res.status(500).send('') 
-		if(result[0]) res.status(200).json({accept : (result[0].score === 100) ? true : false,...result[0]})
+		if(result[0]) res.status(200).json(
+			{
+				accept : (result[0].score === 100) ? true : (result[0].state) ? false : undefined,
+				...result[0]
+			})
 		else res.status(200).json({state : -1})
 	})
 }
