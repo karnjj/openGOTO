@@ -6,12 +6,12 @@ import AnnounceCard from '../components/AnnounceCard'
 
 import { withAuthSync } from '../auth'
 
-const Index = ({ tasks, serverTime = 1500 }) => {
+const Index = ({ problem, serverTime = 3 * 60 * 60 }) => {
 	return (
 		<PageLayout>
 			<Row xs={1}>
 				<Col lg={8} className='pr-0 pr-5'>
-					{tasks?.map((taskData, index) => (
+					{problem?.map((taskData, index) => (
 						<TaskCard key={index} {...taskData} />
 					))}
 				</Col>
@@ -29,7 +29,8 @@ Index.getInitialProps = async (ctx) => {
 	let headers = { 'Content-Type': 'application/json' }
 	const res = await fetch(url, { headers })
 	const json = await res.json()
-	return { tasks: json.problem, serverTime: json.serverTime }
+
+	return { ...json }
 }
 
 export default withAuthSync(Index)
