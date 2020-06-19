@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Card } from 'react-bootstrap'
 
-const TimerCard = ({ currentTime }) => {
+export const CountDownTimer = ({ currentTime }) => {
 	const [timeLeft, setTimeLeft] = useState(currentTime)
 	const countDown = () => setTimeLeft((prevTime) => prevTime - 1)
 
@@ -25,14 +25,16 @@ const TimerCard = ({ currentTime }) => {
 
 		return `${hour} h : ${minute} m : ${second} s`
 	}
+	return <div>{timeToString(timeLeft)}</div>
+}
 
+export const TimerCard = (props) => {
 	return (
 		<Card className='mb-5'>
 			<Card.Body as='h1' className='text-center p-4'>
-				{timeToString(timeLeft)}
+				<CountDownTimer {...props}/>
 			</Card.Body>
 		</Card>
 	)
 }
 
-export default TimerCard
