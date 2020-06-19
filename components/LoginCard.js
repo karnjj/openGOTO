@@ -1,12 +1,22 @@
-import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap'
+import { useState } from 'react'
+
+import { login } from '../auth'
+import {
+	Row,
+	Col,
+	Card,
+	Button,
+	Form,
+	Image,
+	Modal,
+	Alert,
+} from 'react-bootstrap'
 import styled from 'styled-components'
-import { CardText } from 'react-bootstrap/Card'
 
 const OutlineButton = styled(Button)`
 	color: #ff851b;
 	background-color: white;
 	border-color: #ff851b;
-	width: 390px;
 	&:hover,
 	&:focus {
 		background-color: #ff851b;
@@ -20,11 +30,6 @@ const OutlineButton = styled(Button)`
 	}
 `
 
-const CustomTitle = styled(Card.Title)`
-	padding-top: 50px;
-	font-size: 30px;
-`
-
 const CustomForm = styled(Form.Control)`
 	&:focus {
 		border-color: #ff851b;
@@ -33,23 +38,84 @@ const CustomForm = styled(Form.Control)`
 `
 
 const LoginCard = () => {
+	const [username, setUsername] = useState('')
+	const [password, setPassword] = useState('')
+	const [error, setError] = useState(false)
+
+	const handleChangeUser = (event) => setUsername(event.target.value)
+	const handleChangePass = (event) => setPassword(event.target.value)
+	const closeAlert = () => setError(false)
+
+	const handleSubmit = async (event) => {
+		event.preventDefault()
+		const url = `${process.env.API_URL}/api/login`
+		try {
+			const response = await fetch(url, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ username, password }),
+			})
+			if (response.ok) {
+				const { token } = await response.json()
+				login(token)
+			} else {
+				let error = new Error(response.statusText)
+				console.log(error)
+				setError(true)
+			}
+		} catch (error) {
+			console.error(
+				'You have an error in your code or there are Network issues.',
+				error
+			)
+			throw new Error(error)
+		}
+	}
+
 	return (
-		<Card style={{ backgroundColor: '#f7f7f7' }}>
-			<CustomTitle className='mx-auto'>openGOTO</CustomTitle>
+		<Card style={{ backgroundColor: '#f7f7f7', width: '375px' }}>
+			<Image
+				src='otoglogo.png'
+				style={{ width: '70px' }}
+				className='mx-auto mt-4'
+			/>
 			<Card.Body as='Container'>
-				<Row className='d-flex justify-content-center px-0 px-md-5'>
-					<Col className='mx-auto'>
-						<Form className='pb-4'>
-							<Form.Group controlId='username_form'>
-								<Form.Label>Username: </Form.Label>
-								<CustomForm type='text' placeholder='Username' />
+				<Modal show={!!error} onHide={closeAlert}>
+					<Modal.Header closeButton>
+						<Modal.Title>Login Failed !</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
+						<Alert variant='danger'>Username หรือ Password ไม่ถูกต้อง</Alert>
+					</Modal.Body>
+				</Modal>
+				<Row className='d-flex justify-content-center'>
+					<Col className='mx-auto px-5'>
+						<Form onSubmit={handleSubmit}>
+							<Form.Group>
+								<Form.Label>Username </Form.Label>
+								<CustomForm
+									value={username}
+									onChange={handleChangeUser}
+									type='username'
+									placeholder='Username'
+									required
+								/>
 							</Form.Group>
-							<Form.Group controlId='password_form'>
-								<Form.Label>Password: </Form.Label>
-								<CustomForm type='password' placeholder='Password' />
+							<Form.Group>
+								<Form.Label>Password </Form.Label>
+								<CustomForm
+									value={password}
+									onChange={handleChangePass}
+									type='password'
+									placeholder='Password'
+									required
+								/>
 							</Form.Group>
+							<br />
+							<OutlineButton type='submit' block>
+								Login
+							</OutlineButton>
 						</Form>
-						<OutlineButton>Login</OutlineButton>
 					</Col>
 				</Row>
 				<br />
