@@ -77,7 +77,6 @@ const TaskCard = (props) => {
 				},
 			})
 			const json = await response.json()
-			console.log(json)
 			const { state } = json
 			if (state === 0) {
 				setResult(json)
