@@ -5,10 +5,10 @@ import { darken, opacify } from 'polished'
 import { logout, useAuthContext } from '../auth'
 
 const StyledNavbar = styled(Navbar)`
-	background: ${vars.lightGray};
+	background: ${vars.pornhubGray};
 	a,
 	h4 {
-		color: ${vars.black}!important;
+		color: ${vars.white}!important;
 	}
 	button {
 		color: ${vars.white}!important;
@@ -36,7 +36,7 @@ const Header = () => {
 	const { sname } = userData
 	return (
 		<StyledNavbar expand='lg' className='justify-content-between px-5'>
-			<Navbar.Brand>POSN KKU</Navbar.Brand>
+			<Navbar.Brand style = {{color : `${vars.white}`}}>POSN KKU</Navbar.Brand>
 			<h4 className='my-auto'>สวัสดี ! {sname}</h4>
 			<LogoutButton onClick={logout} variant='danger'>
 				Logout
