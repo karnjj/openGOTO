@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Accordion, Row, Col, Card, Form, Button } from 'react-bootstrap'
 import ResultTable from './ResultTable'
 import styled from 'styled-components'
@@ -43,9 +43,8 @@ const TaskCard = (props) => {
 	const { problemId, name } = props
 	const [file, setFile] = useState(null)
 
-	const accept = 'true',
-		result = ['PPPPPPPPPP', '100'],
-		submissionId = '123'
+	const [result, setResult] = useState(null)
+	const { accept, submissionId } = result ?? {}
 
 	const selectFile = (event) => setFile(event.target.files[0])
 
@@ -67,6 +66,29 @@ const TaskCard = (props) => {
 		if (respone.ok) window.location.reload(false)
 	}
 
+	useEffect(() => {
+		var waitingData
+		const fetchData = async () => {
+			const url = `${process.env.API_URL}/api/submission/${problemId}`
+			const response = await fetch(url, {
+				headers: {
+					authorization: `Bearer ${token}`,
+				},
+			})
+			const json = await response.json()
+			const { state } = json
+			if (state === 0) {
+				waitingData = setTimeout(fetchData, 1000)
+			} else if (state == 1) {
+				setResult(json)
+			} else if (state == -1) {
+				setResult({ verdict: '-', score: '-' })
+			}
+		}
+		fetchData()
+		return () => clearTimeout(waitingData)
+	}, [])
+
 	return (
 		<Accordion as={Card} defaultActiveKey='0' className='mb-4'>
 			<Accordion.Toggle as={CardHeader} eventKey='0' accept={accept}>
@@ -76,8 +98,8 @@ const TaskCard = (props) => {
 			</Accordion.Toggle>
 			<Accordion.Collapse eventKey='0'>
 				<Card.Body as={Row} className='p-5 align-items-center'>
-					<Col className='ml-2 mr-5'>
-						<ResultTable result={result} accept={accept} />
+					<Col className='ml-2 mr-5 d-flex justify-content-center'>
+						<ResultTable {...result} />
 					</Col>
 					<Col style={{ maxWidth: '290px' }}>
 						<Form.File

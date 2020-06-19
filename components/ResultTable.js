@@ -1,4 +1,4 @@
-import { Table } from 'react-bootstrap'
+import { Table, Spinner } from 'react-bootstrap'
 import styled from 'styled-components'
 import vars from '../styles/vars'
 
@@ -18,8 +18,12 @@ const TaskStatus = styled.th`
 	}};
 `
 
-const ResultTable = ({ result, accept }) => {
-	return (
+const ResultTable = ({ state, accept, verdict, score }) => {
+	return state === undefined ? (
+		<Spinner animation='border' role='status'>
+			<span className='sr-only'>Loading...</span>
+		</Spinner>
+	) : (
 		<StyledTable size='sm' bordered className='mb-0'>
 			<tbody>
 				<tr>
@@ -28,11 +32,8 @@ const ResultTable = ({ result, accept }) => {
 					<th>Score</th>
 				</tr>
 				<tr>
-					{result?.map((res, index) => (
-						<td className='py-3' key={index}>
-							{res}
-						</td>
-					))}
+					<td className='py-3'>{verdict}</td>
+					<td className='py-3'>{score}</td>
 				</tr>
 			</tbody>
 		</StyledTable>
