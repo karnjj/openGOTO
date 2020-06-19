@@ -18,14 +18,14 @@ const StyledButton = styled(Button)`
 	border-color: ${vars.buttonGray};
 `
 
-const ViewCodeButton = ({ submissionId }) => {
+const ViewCodeButton = ({ problemId, sent }) => {
 	const { token } = useAuthContext()
 	const [show, setShow] = useState(false)
 	const [sourceCode, setSourceCode] = useState('')
 
 	const handleClose = () => setShow(false)
 	const handleShow = async () => {
-		let url = `${process.env.API_URL}/api/scode/${submissionId}`
+		let url = `${process.env.API_URL}/api/scode/${problemId}`
 		let headers = { 'Content-Type': 'application/json' }
 		headers['authorization'] = `Bearer ${token}`
 		const response = await fetch(url, { headers })
@@ -42,16 +42,12 @@ const ViewCodeButton = ({ submissionId }) => {
 
 	return (
 		<>
-			<StyledButton
-				variant='secondary'
-				onClick={handleShow}
-				disabled={!submissionId}
-			>
+			<StyledButton variant='secondary' onClick={handleShow} disabled={!sent}>
 				🔎
 			</StyledButton>
 			<Modal show={show} onHide={handleClose} centered size='lg'>
 				<Modal.Header closeButton>
-					<Modal.Title>Submission : {submissionId}</Modal.Title>
+					<Modal.Title>Submission : {problemId}</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 					<FontPre className='line-numbers'>
