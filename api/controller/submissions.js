@@ -19,8 +19,9 @@ function getSubmissionWithId(req,res) {
 	var sql = `select submissionId,verdict,errmsg,state,score from submission 
 		where userId = ? and probId = ? order by submissionId desc limit 1`
 	db.query(sql,[userData.id,probId],(err,result) => {
-		err ? res.status(500).send('') :
-		res.status(200).json(result[0])
+		if(err) return res.status(500).send('') 
+		if(result[0]) res.status(200).json({accept : (result[0].score === 100) ? true : false,...result[0]})
+		else res.status(200).json({state : -1})
 	})
 }
 
