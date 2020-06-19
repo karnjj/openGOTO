@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from 'react'
 
 import PageLayout from '../components/PageLayout'
-import { Row, Col, Jumbotron } from 'react-bootstrap'
+import { Row, Col, Jumbotron, Container, Card } from 'react-bootstrap'
 import TaskCard from '../components/TaskCard'
-import TimerCard from '../components/TimerCard'
+import { TimerCard, CountDownTimer } from '../components/TimerCard'
 import AnnounceCard from '../components/AnnounceCard'
-
+import vars from "../styles/vars"
 import { withAuthSync, useAuthContext } from '../auth'
-import styled from 'styled-components'
+import styled, {keyframes} from 'styled-components'
 
 const Announce = styled(Jumbotron)`
 	display: flex;
@@ -17,6 +17,33 @@ const Announce = styled(Jumbotron)`
 	h1 {
 		font-size: 3.5rem;
 	}
+`
+const WaitingTitle = styled(Card.Title)`
+	font-size: 36px; 
+	color: ${vars.white}; 
+	font-weight: bold;
+`
+const WaitingBody = styled(Card.Body)`
+	font-size: 98px; 
+	color: ${vars.white}; 
+	font-weight: 800;
+`
+const FadeIn = keyframes `
+	0%{
+		opacity: 0;
+	}
+	100%{
+		opacity: 1;
+	}
+`
+const WaitingCard = styled(Card)`
+	background: none;
+	border-color: transparent;
+	animation: ${FadeIn} 1.3s linear;
+`
+
+const GradiantContainer = styled(Container)`
+	background-image: linear-gradient(60deg, #ff851b 10%, #ec88c2 90%);
 `
 
 const TaskCards = ({ start, end, serverTime }) => {
@@ -73,12 +100,18 @@ const WaitingAnnounce = ({ start, serverTime }) => {
 	}, [timeLeft.current])
 
 	return (
-		<PageLayout container={false}>
-			<Announce>
-				<h1>การสอบจะเริ่มตอน</h1>
-				<h2>{` ${date.getHours()} : ${date.getMinutes()}`}</h2>
-			</Announce>
-		</PageLayout>
+		<GradiantContainer
+			fluid
+			className='d-flex align-items-center justify-content-center'
+			style={{ height: '100vh' }}
+		>
+			<WaitingCard className='d-flex align-items-center justify-content-center'>
+				<WaitingTitle>การสอบจะเริ่มต้นขึ้นในอีก</WaitingTitle>
+				<WaitingBody>
+					<CountDownTimer currentTime={start - serverTime}/>
+				</WaitingBody>
+			</WaitingCard>
+		</GradiantContainer>
 	)
 }
 
@@ -96,7 +129,7 @@ const Index = (props) => {
 	console.log(props);
 	const { start, end, serverTime } = props
 	const isStarting = serverTime < start
-	const isHolding = start < serverTime && serverTime < end
+	const isHolding = start <= serverTime && serverTime < end
 
 	return isStarting ? (
 		<WaitingAnnounce {...props} />
