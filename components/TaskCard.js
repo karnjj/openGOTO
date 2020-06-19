@@ -44,7 +44,8 @@ const TaskCard = (props) => {
 	const [file, setFile] = useState(null)
 
 	const [result, setResult] = useState(null)
-	const { accept, submissionId } = result ?? {}
+	const { accept } = result ?? {}
+	const sent = accept !== undefined
 
 	const selectFile = (event) => setFile(event.target.files[0])
 
@@ -113,7 +114,7 @@ const TaskCard = (props) => {
 							custom
 						/>
 						<div className='d-flex justify-content-between'>
-							<ViewCodeButton submissionId={submissionId} />
+							<ViewCodeButton problemId={problemId} sent={sent} />
 							<ViewPDFButton
 								className='btn btn-success'
 								target='_blank'

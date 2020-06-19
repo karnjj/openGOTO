@@ -19,7 +19,7 @@ const TaskStatus = styled.th`
 `
 
 const ResultTable = ({ state, accept, verdict, score }) => {
-	return state === undefined ? (
+	return state === 0 ? (
 		<Spinner animation='border' role='status'>
 			<span className='sr-only'>Loading...</span>
 		</Spinner>
