@@ -3,7 +3,9 @@ import { Row, Col } from 'react-bootstrap'
 import TaskCard from '../components/TaskCard'
 import TimerCard from '../components/TimerCard'
 import AnnounceCard from '../components/AnnounceCard'
- 
+
+import { withAuthSync, useAuthContext } from '../auth'
+
 const tasks = [
 	{
 		problemId: 1,
@@ -25,9 +27,7 @@ const tasks = [
 		result: ['-', '-'],
 	},
 ]
-const serverTime = 1500
-
-const Index = () => {
+const Index = ({ tasks, serverTime = 1500 }) => {
 	return (
 		<PageLayout>
 			<Row xs={1}>
@@ -45,4 +45,12 @@ const Index = () => {
 	)
 }
 
-export default Index
+Index.getInitialProps = async (ctx) => {
+	const url = `${process.env.API_URL}/api/problem`
+	let headers = { 'Content-Type': 'application/json' }
+	const res = await fetch(url, { headers })
+	const json = await res.json()
+	return { tasks: json.problem, serverTime: json.serverTime }
+}
+
+export default withAuthSync(Index)

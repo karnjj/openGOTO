@@ -2,14 +2,16 @@ import { Navbar, Button } from 'react-bootstrap'
 import styled from 'styled-components'
 import vars from '../styles/vars'
 import { darken, opacify } from 'polished'
+import { logout, useAuthContext } from '../auth'
+
 const StyledNavbar = styled(Navbar)`
 	background: ${vars.lightGray};
 	a,
-	h4{
+	h4 {
 		color: ${vars.black}!important;
 	}
-	button{
-		color: ${vars.white}!important; 
+	button {
+		color: ${vars.white}!important;
 	}
 `
 const LogoutButton = styled(Button)`
@@ -28,11 +30,10 @@ const LogoutButton = styled(Button)`
 	}
 	padding: 6px 24px;
 `
-const logout = () => {
-	console.log('logout')
-}
 
-const Header = ({ sname = 'พี่โต หวั่นไหว' }) => {
+const Header = () => {
+	const { userData } = useAuthContext()
+	const { sname } = userData
 	return (
 		<StyledNavbar expand='lg' className='justify-content-between px-5'>
 			<Navbar.Brand href='#home'>POSN KKU</Navbar.Brand>
