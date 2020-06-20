@@ -46,7 +46,7 @@ const GradiantContainer = styled(Container)`
 	background-image: linear-gradient(60deg, #ff851b 10%, #ec88c2 90%);
 `
 
-const TaskCards = ({ end, serverTime }) => {
+const Contest = ({ end, serverTime }) => {
 	const { token } = useAuthContext()
 	const [problem, setProblem] = useState(null)
 
@@ -69,12 +69,16 @@ const TaskCards = ({ end, serverTime }) => {
 	return (
 		<PageLayout>
 			<Row xs={1}>
-				<Col lg={8} className='pr-0 pr-5'>
+				<Col lg={8} className='pr-3 pr-lg-5'>
 					{problem?.map((taskData, index) => (
 						<TaskCard key={index} {...taskData} />
 					))}
 				</Col>
-				<Col lg={4}>
+				<Col
+					xs={{ order: 'first' }}
+					lg={{ order: 'last', span: 4 }}
+					className='mb-5'
+				>
 					<TimerCard currentTime={end - serverTime} />
 					<AnnounceCard />
 				</Col>
@@ -113,12 +117,12 @@ const EndingAnnounce = (props) => {
 const Index = (props) => {
 	const { start, end, serverTime } = props
 	const isStarting = serverTime < start
-	const isHolding = start <= serverTime && serverTime < end
+	const isHolding = (start <= serverTime && serverTime < end) || true
 
 	return isStarting ? (
 		<WaitingAnnounce {...props} />
 	) : isHolding ? (
-		<TaskCards {...props} />
+		<Contest {...props} />
 	) : (
 		<EndingAnnounce />
 	)

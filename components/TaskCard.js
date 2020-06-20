@@ -99,11 +99,15 @@ const TaskCard = (props) => {
 				</h5>
 			</Accordion.Toggle>
 			<Accordion.Collapse eventKey='0'>
-				<Card.Body as={Row} className='p-5 align-items-center'>
-					<Col className='ml-2 mr-5 d-flex justify-content-center'>
+				<Card.Body as={Row} className='p-5 align-items-center' xs={1}>
+					<Col lg className='ml-2 mr-5 d-flex justify-content-center'>
 						<ResultTable {...result} />
 					</Col>
-					<Col style={{ maxWidth: '290px' }}>
+					<Col
+						lg
+						style={{ maxWidth: '290px' }}
+						className='mx-auto mt-4 mt-lg-0'
+					>
 						<Form.File
 							as={Col}
 							className='mb-3'

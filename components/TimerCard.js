@@ -11,9 +11,9 @@ export const CountDownTimer = ({ currentTime, mode = 'en' }) => {
 	}, [])
 
 	useEffect(() => {
-		if (timeLeft <= 0) {
-			window.location.reload(false)
-		}
+		// if (timeLeft <= 0) {
+		// 	window.location.reload(false)
+		// }
 	}, [timeLeft])
 
 	const toTimeObject = (time) => {

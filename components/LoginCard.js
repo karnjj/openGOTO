@@ -37,7 +37,7 @@ const CustomForm = styled(Form.Control)`
 	}
 `
 
-const FadeIn = keyframes `
+const FadeIn = keyframes`
 	0%{
 		opacity: 0;
 	}
@@ -45,7 +45,7 @@ const FadeIn = keyframes `
 		opacity: 1;
 	}
 `
-const FadeOut = keyframes `
+const FadeOut = keyframes`
 	0%{
 		opacity: 1;
 	}
@@ -57,7 +57,7 @@ const FadeOutCard = styled(Card)`
 	background-color: #f7f7f7;
 	width: 375px;
 	animation: 1.3s ${FadeIn} ease-out;
-` 
+`
 
 const LoginCard = () => {
 	const [username, setUsername] = useState('')
@@ -98,7 +98,7 @@ const LoginCard = () => {
 		<FadeOutCard>
 			<Image
 				src='otoglogo.png'
-				style={{ width: '70px' }}
+				style={{ width: '70px', minWidth: '70px' }}
 				className='mx-auto mt-4'
 			/>
 			<Card.Body as={Container}>

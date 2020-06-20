@@ -8,9 +8,12 @@ const AnnounceCard = () => {
 			</Card.Header>
 			<Card.Body>
 				<ul>
-					<li>ต่อเวลา 30 นาที</li>
-					<li>แก้ไข document ข้อที่ 1</li>
-					<li>เซาถะแหมะ</li>
+					<li>
+						C++ Reference :{' '}
+						<a href='https://en.cppreference.com/w/'>
+							https://en.cppreference.com/w/
+						</a>
+					</li>
 				</ul>
 			</Card.Body>
 		</Card>

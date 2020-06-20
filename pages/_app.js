@@ -30,10 +30,6 @@ const MyApp = (props) => {
 					href='https://fonts.googleapis.com/css?family=Fira+Code&display=swap'
 					rel='stylesheet'
 				/>
-				<link
-					href='https://fonts.googleapis.com/css2?family=Roboto&display=swap'
-					rel='stylesheet'
-				/>
 				<meta name='theme-color' content='#ff851b' />
 			</Head>
 			<>
