@@ -21,21 +21,6 @@ export const logout = () => {
 
 export const withAuthSync = (WrappedComponent) => {
 	const Wrapper = ({ token, userData, ...rest }) => {
-		const syncLogout = (event) => {
-			if (event.key === 'logout') {
-				console.log('logged out from storage!')
-				window.location.reload(false)
-			}
-		}
-
-		useEffect(() => {
-			window.addEventListener('storage', syncLogout)
-			return () => {
-				window.removeEventListener('storage', syncLogout)
-				window.localStorage.removeItem('logout')
-			}
-		}, [])
-
 		useEffect(() => {
 			if (!token) router.push('/login')
 		}, [])

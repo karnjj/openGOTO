@@ -58,7 +58,7 @@ const Contest = ({ end, serverTime }) => {
 		const fetchData = async () => {
 			const url = `${process.env.API_URL}/api/problem`
 			let headers = { 'Content-Type': 'application/json' }
-			headers['authorization'] = token
+			headers['authorization'] = `Bearer ${token}`
 			const res = await fetch(url, { headers })
 			const json = await res.json()
 			if (!cancelled) {

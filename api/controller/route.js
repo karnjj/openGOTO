@@ -15,6 +15,7 @@ router.post('/upload', users.multerConfig.single('file'), users.uploadFie)
 router.get('/problem',problems.getProblem)
 router.get('/submission/:probId',submissions.getSubmissionWithId)
 router.get('/contest',contests.contest)
+router.get('/docs/:probId',problems.getDocs)
 
 
 module.exports = router
