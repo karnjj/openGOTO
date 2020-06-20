@@ -34,12 +34,15 @@ export const withAuthSync = (WrappedComponent) => {
 				window.localStorage.removeItem('logout')
 			}
 		}, [])
+		useEffect(() => {
+			if (!token) router.push('/login')
+		}, [])
 		return userData ? (
 			<AuthProvider value={{ userData, token }}>
 				<WrappedComponent {...rest} />
 			</AuthProvider>
 		) : (
-			<Error statusCode={404} />
+			<Error statusCode={401} />
 		)
 	}
 	Wrapper.getInitialProps = async (ctx) => {
