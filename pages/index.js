@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 
 import PageLayout from '../components/PageLayout'
+import Header from "../components/Header"
 import { Row, Col, Jumbotron, Container, Card } from 'react-bootstrap'
 import TaskCard from '../components/TaskCard'
 import { TimerCard, CountDownTimer } from '../components/TimerCard'
@@ -36,12 +37,14 @@ const FadeIn = keyframes`
 		opacity: 1;
 	}
 `
-const WaitingCard = styled(Card)`
+const TextCard = styled(Card)`
 	background: none;
 	border-color: transparent;
-	animation: ${FadeIn} 1.3s linear;
 `
-
+const WaitingCard = styled(TextCard)`
+	position: absolute;
+	animation: ${FadeIn} 1.7s linear;
+`
 const GradiantContainer = styled(Container)`
 	background-image: linear-gradient(60deg, #ff851b 10%, #ec88c2 90%);
 `
@@ -55,7 +58,7 @@ const Contest = ({ end, serverTime }) => {
 		const fetchData = async () => {
 			const url = `${process.env.API_URL}/api/problem`
 			let headers = { 'Content-Type': 'application/json' }
-			headers['authorization'] = token
+			headers['authorization'] = `Bearer ${token}`
 			const res = await fetch(url, { headers })
 			const json = await res.json()
 			if (!cancelled) {
@@ -89,11 +92,13 @@ const Contest = ({ end, serverTime }) => {
 
 const WaitingAnnounce = ({ start, serverTime }) => {
 	return (
-		<GradiantContainer
+		<>
+		<Header fixed="top"/>
+			<GradiantContainer
 			fluid
 			className='d-flex align-items-center justify-content-center'
 			style={{ height: '100vh' }}
-		>
+			>
 			<WaitingCard className='d-flex align-items-center justify-content-center'>
 				<WaitingTitle>การสอบจะเริ่มต้นขึ้นในอีก</WaitingTitle>
 				<WaitingBody>
@@ -101,6 +106,8 @@ const WaitingAnnounce = ({ start, serverTime }) => {
 				</WaitingBody>
 			</WaitingCard>
 		</GradiantContainer>
+		</>
+	
 	)
 }
 

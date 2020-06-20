@@ -31,11 +31,11 @@ const LogoutButton = styled(Button)`
 	padding: 6px 24px;
 `
 
-const Header = () => {
+const Header = (props) => {
 	const { userData } = useAuthContext()
 	const { sname } = userData
 	return (
-		<StyledNavbar expand='lg' className='justify-content-between px-5'>
+		<StyledNavbar expand='lg' className='justify-content-between px-5' {...props}>
 			<Navbar.Brand style = {{color : `${vars.white}`}}>POSN KKU</Navbar.Brand>
 			<h4 className='my-auto'>สวัสดี ! {sname}</h4>
 			<LogoutButton onClick={logout} variant='danger'>

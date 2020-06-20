@@ -3,6 +3,7 @@ const fs = require('fs')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const logger = require('morgan');
+const cookieParser = require('cookie-parser')
 const routes = require('./controller/route')
 
 process.env.SECRET_KEY = fs.readFileSync('./private.key', 'utf8');
@@ -14,6 +15,7 @@ var PORT = process.env.PORT || 8000
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cookieParser())
 app.use(logger('dev'));
 
 app.use('/api',routes)
