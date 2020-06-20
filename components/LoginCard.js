@@ -98,7 +98,7 @@ const LoginCard = () => {
 		<FadeOutCard>
 			<Image
 				src='otoglogo.png'
-				style={{ width: '70px', minWidth: '70px' }}
+				style={{ width: '70px' }}
 				className='mx-auto mt-4'
 			/>
 			<Card.Body as={Container}>

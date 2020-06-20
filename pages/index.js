@@ -117,7 +117,7 @@ const EndingAnnounce = (props) => {
 const Index = (props) => {
 	const { start, end, serverTime } = props
 	const isStarting = serverTime < start
-	const isHolding = (start <= serverTime && serverTime < end) || true
+	const isHolding = start <= serverTime && serverTime < end
 
 	return isStarting ? (
 		<WaitingAnnounce {...props} />
