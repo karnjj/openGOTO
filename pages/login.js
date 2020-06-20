@@ -5,7 +5,6 @@ import styled from 'styled-components'
 const GradiantContainer = styled(Container)`
 	background-image: linear-gradient(60deg, #ff851b 10%, #ec88c2 90%);
 `
-
 const Login = () => {
 	return (
 		<GradiantContainer

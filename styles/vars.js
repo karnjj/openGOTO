@@ -6,6 +6,7 @@ export default {
 	black: '#000000',
 	white: '#ffffff',
 	red: '#dc3545',
+	pornhubGray: '#454545',
 	statusDF: '#A0A0A0',
 	statusAC: 'rgba(38, 104, 96, 0.7)',
 	statusWA: 'rgba(255, 0, 0, 0.5)',
