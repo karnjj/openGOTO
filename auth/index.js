@@ -27,6 +27,7 @@ export const withAuthSync = (WrappedComponent) => {
 				window.location.reload(false)
 			}
 		}
+
 		useEffect(() => {
 			window.addEventListener('storage', syncLogout)
 			return () => {
@@ -34,9 +35,11 @@ export const withAuthSync = (WrappedComponent) => {
 				window.localStorage.removeItem('logout')
 			}
 		}, [])
+
 		useEffect(() => {
 			if (!token) router.push('/login')
 		}, [])
+
 		return userData ? (
 			<AuthProvider value={{ userData, token }}>
 				<WrappedComponent {...rest} />

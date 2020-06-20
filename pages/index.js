@@ -46,7 +46,7 @@ const GradiantContainer = styled(Container)`
 	background-image: linear-gradient(60deg, #ff851b 10%, #ec88c2 90%);
 `
 
-const TaskCards = ({ serverTime }) => {
+const TaskCards = ({ end, serverTime }) => {
 	const { token } = useAuthContext()
 	const [problem, setProblem] = useState(null)
 
@@ -84,21 +84,6 @@ const TaskCards = ({ serverTime }) => {
 }
 
 const WaitingAnnounce = ({ start, serverTime }) => {
-	const timeLeft = useRef(serverTime - start)
-	const countDown = () => (timeLeft.current -= 1)
-	const date = new Date(start * 1000)
-
-	useEffect(() => {
-		const timer = setInterval(countDown, 1000)
-		return () => clearInterval(timer)
-	}, [])
-
-	useEffect(() => {
-		if (timeLeft <= 0) {
-			window.location.reload(false)
-		}
-	}, [timeLeft.current])
-
 	return (
 		<GradiantContainer
 			fluid
@@ -108,7 +93,7 @@ const WaitingAnnounce = ({ start, serverTime }) => {
 			<WaitingCard className='d-flex align-items-center justify-content-center'>
 				<WaitingTitle>การสอบจะเริ่มต้นขึ้นในอีก</WaitingTitle>
 				<WaitingBody>
-					<CountDownTimer currentTime={start - serverTime} />
+					<CountDownTimer mode='th' currentTime={start - serverTime} />
 				</WaitingBody>
 			</WaitingCard>
 		</GradiantContainer>
