@@ -19,7 +19,7 @@ const Announce = styled(Jumbotron)`
 	}
 `
 
-const TaskCards = ({ start, end, serverTime }) => {
+const TaskCards = ({ serverTime }) => {
 	const { token } = useAuthContext()
 	const [problem, setProblem] = useState(null)
 
