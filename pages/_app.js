@@ -23,8 +23,8 @@ const MyApp = (props) => {
 			<Head>
 				<title>KKU Contest</title>
 				{/* <link rel='manifest' href='/manifest.json' /> */}
-				{/* <link rel='shortcut icon' href='/logo196.png' /> */}
 				{/* <link rel='apple-touch-icon' href='/logoIOS.png' /> */}
+				<link rel='shortcut icon' href='/logo196.png' />
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
 				<link
 					href='https://fonts.googleapis.com/css?family=Fira+Code&display=swap'
