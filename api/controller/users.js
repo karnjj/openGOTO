@@ -18,14 +18,14 @@ var verifyToken = token => {
 var storage = multer.diskStorage({
 	destination: function (req, file, cb) {
 		var userId = Number(req.body.userId)
-		mkdirp(`upload/${userId}/`).then(() => {
-			cb(null, `upload/${userId}/`)
+		var probId = Number(req.body.probId)
+		mkdirp(`upload/${userId}/${probId}`).then(() => {
+			cb(null, `upload/${userId}/${probId}`)
 		})
 	},
 	filename: function (req, file, cb) {
 		const timeStamp = Math.floor(Date.now()/1000)
-		var probId = Number(req.body.probId)
-		cb(null, `${probId}_${timeStamp}.cpp`)
+		cb(null, `${timeStamp}.cpp`)
 	}
 })
 const multerConfig = multer({ storage: storage })
@@ -58,7 +58,7 @@ function uploadFie(req,res) {
 	const { path, filename } = req.file
 	const {	userId, probId } = req.body
 	var scode = fs.readFileSync(path,'utf8');
-	var time = Number(filename.slice(filename.indexOf('_')+1,filename.indexOf('.')))
+	var time = Number(filename.split('.')[0])
 	var sql = "insert into submission (time, userId, probId, state,scode) values ?";
 	var values = [[time,Number(userId),Number(probId),0,scode],];
 	db.query(sql, [values], (err, result) => (
