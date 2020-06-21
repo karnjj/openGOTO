@@ -29,7 +29,7 @@ function getProblem(req,res) {
 function getDocs(req,res) {
     const token = req.cookies.token
     const userData = verifyToken(token)
-    if(!userData) return res.status(401).send('')
+    //if(!userData) return res.status(401).send('')
     var sql = 'select * from config limit 1'
     db.query(sql , (err,config) => {
         config = config[0]
