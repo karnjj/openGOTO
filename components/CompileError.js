@@ -18,7 +18,7 @@ const FontPre = styled.pre`
 	}
 `
 const CompileError = ({ errmsg, verdict }) => {
-	const [showError, setShowError] = useState(true)
+	const [showError, setShowError] = useState(false)
 	const handleShow = () => setShowError(true)
 	const handleClose = () => setShowError(false)
 
