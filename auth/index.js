@@ -6,7 +6,7 @@ import router from 'next/router'
 import nextCookie from 'next-cookies'
 
 export const login = (token) => {
-	cookie.set('token', token)
+	cookie.set('token', token, { expires: 5 / 24 })
 	router.push('/')
 }
 
@@ -21,10 +21,6 @@ export const logout = () => {
 
 export const withAuthSync = (WrappedComponent) => {
 	const Wrapper = ({ token, userData, ...rest }) => {
-		useEffect(() => {
-			if (!token) router.push('/login')
-		}, [])
-
 		return userData ? (
 			<AuthProvider value={{ userData, token }}>
 				<WrappedComponent {...rest} />
@@ -39,6 +35,12 @@ export const withAuthSync = (WrappedComponent) => {
 			(await WrappedComponent.getInitialProps(ctx))
 		const { token } = nextCookie(ctx)
 		const userData = await auth(token)
+		if (ctx.res && !userData) {
+			ctx.res.writeHead(301, {
+			  Location: '/login'
+			});
+			ctx.res.end();
+		}
 		return { ...componentProps, token, userData }
 	}
 	return Wrapper

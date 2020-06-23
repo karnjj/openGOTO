@@ -49,6 +49,7 @@ async function login(req,res) {
 		const data = { id: userId, sname: sname}
 		let token = jwt.sign(data, process.env.SECRET_KEY, {
 			algorithm: "RS256",
+			expiresIn: '5h'
 		})
 		res.status(200).json({token,msg:"success"})
 	}
