@@ -19,7 +19,7 @@
     "next": "9.4.4",
     "next-cookies": "^2.0.3",
     "polished": "^3.6.5",
-    "prismjs": "^1.20.0",
+    "prismjs": "^1.21.0",
     "react": "16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-dom": "16.13.1",
